@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.238.1",
-    "hapi": "^17.4.0"
+    "hapi": "^17.4.0",
+    "node-uuid": "^1.4.8"
   }
 }
