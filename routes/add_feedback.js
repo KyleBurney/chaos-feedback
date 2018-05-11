@@ -5,7 +5,6 @@ AWS.config.update({ region: 'us-west-2' });
 var dynamodb = new AWS.DynamoDB();
 
 // todo: 
-// - validate that the renter has checked into property
 // - add logic to check if the average of last 5 ratings for this property is < 5 stars
 //   call api to deactivate listing if it is
 module.exports = {
@@ -13,6 +12,8 @@ module.exports = {
     path: '/feedback',
     handler: (r, h) => {
         const promise = new Promise((resolve, reject) => {
+            // call api to get checkin date for renter
+            // if the renter has not checked in yet, reject
             var uuid1 = uuid.v1();
             var params = {
                 TableName: 'feedback',

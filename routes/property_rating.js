@@ -10,16 +10,15 @@ module.exports = {
         const promise = new Promise((resolve, reject) => {
             var params = {
                 ExpressionAttributeValues: {
-                    ":propID": {
-                        S: r.params.propertyID
-                    }
+                    ':propID': { S: r.params.propertyID }
                 },
-                FilterExpression: "contains (property_id, :propID)",
-                ProjectionExpression: "star_rating",
-                TableName: "feedback"
+                KeyConditionExpression: 'property_id = :propID',
+                ProjectionExpression: 'feedback_id, property_id, renter_id, owner_id, star_rating, tags, description',
+                TableName: 'feedback',
+                IndexName: "property_id-index"
             };
 
-            dynamodb.scan(params, function (err, data) {
+            dynamodb.query(params, function (err, data) {
                 if (err) {
                     console.log("Error", err);
                     reject(err)
