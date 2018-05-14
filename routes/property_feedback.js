@@ -14,7 +14,7 @@ module.exports = {
                 },
                 KeyConditionExpression: 'property_id = :propID',
                 ProjectionExpression: 'feedback_id, property_id, renter_id, owner_id, star_rating, tags, description',
-                TableName: 'feedback',
+                TableName: 'chaos-feedback',
                 IndexName: "property_id-index"
             };
 

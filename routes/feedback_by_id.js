@@ -9,7 +9,7 @@ module.exports = {
     handler: (r, h) => {
         const promise = new Promise((resolve, reject) => {
             var params = {
-                TableName: 'feedback',
+                TableName: 'chaos-feedback',
                 Key: {
                     'feedback_id': { S: r.params.feedbackID }
                 },
