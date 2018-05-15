@@ -23,20 +23,23 @@ module.exports = {
                     console.log("Error", err);
                     reject(err)
                 } else {
-                    var feedbacks = []
-
-                    data.Items.forEach(function (element, index, array) {
-                        feedbacks.push({
-                            feedback_id: element.feedback_id.S,
-                            property_id: element.property_id.S,
-                            renter_id: element.renter_id.S,
-                            owner_id: element.owner_id.S,
-                            star_rating: element.star_rating.N,
-                            tags: element.tags.SS,
-                            description: element.description.S
-                        })
-                    });
-                    resolve(feedbacks)
+                    if (data.Items.length == 0) {
+                        reject(new Error("no feedback found for this property"))
+                    } else {
+                        var feedbacks = []
+                        data.Items.forEach(function (element, index, array) {
+                            feedbacks.push({
+                                feedback_id: element.feedback_id.S,
+                                property_id: element.property_id.S,
+                                renter_id: element.renter_id.S,
+                                owner_id: element.owner_id.S,
+                                star_rating: element.star_rating.N,
+                                tags: element.tags.SS,
+                                description: element.description.S
+                            })
+                        });
+                        resolve(feedbacks)
+                    }
                 }
             });
         })

@@ -18,11 +18,14 @@ module.exports = {
 
             dynamodb.getItem(params, function (err, data) {
                 if (err) {
-                    console.log(err)
                     reject(err);
                 } else {
-                    console.log(data)
-                    resolve(data.Item);
+                    if(!data.Item){
+                        reject(new Error("feedback not found"))
+                    }else{
+                        console.log(data)
+                        resolve(data.Item);
+                    }
                 }
             });
         })

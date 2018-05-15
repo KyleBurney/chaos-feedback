@@ -23,13 +23,16 @@ module.exports = {
                     console.log("Error", err);
                     reject(err)
                 } else {
-                    var averageRating = 0
-
-                    data.Items.forEach(function (element, index, array) {
-                        var rating = parseInt(element.star_rating.N)
-                        averageRating += rating
-                    });
-                    resolve(averageRating / data.Items.length)
+                    if (data.Items.length == 0) {
+                        reject(new Error("no feedback found for this property"))
+                    } else {
+                        var averageRating = 0
+                        data.Items.forEach(function (element, index, array) {
+                            var rating = parseInt(element.star_rating.N)
+                            averageRating += rating
+                        });
+                        resolve(averageRating / data.Items.length)
+                    }
                 }
             });
         })
