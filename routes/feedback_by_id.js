@@ -20,11 +20,19 @@ module.exports = {
                 if (err) {
                     reject(err);
                 } else {
-                    if(!data.Item){
+                    if (!data.Item) {
                         reject(new Error("feedback not found"))
-                    }else{
-                        console.log(data)
-                        resolve(data.Item);
+                    } else {
+                        var jsonFeedback = {
+                            feedback_id: data.Item.feedback_id.S,
+                            property_id: data.Item.property_id.S,
+                            renter_id: data.Item.renter_id.S,
+                            owner_id: data.Item.owner_id.S,
+                            star_rating: data.Item.star_rating.N,
+                            tags: data.Item.tags.SS,
+                            description: data.Item.description.S
+                        }
+                        resolve(jsonFeedback);
                     }
                 }
             });
